@@ -112,6 +112,22 @@ Ieee1609Dot2Data* Ieee1609Dot2::createSPDU(int type, Ieee1609Dot2Data* data)
     return spdu;
 }
 
+void Ieee1609Dot2::SecSecureDataPreprocessingRequest(
+        Ieee1609Dot2Data* data,
+        int sdeeID,
+        int psid,
+        bool useP2PCD
+        )
+{
+    int inputType = data->getContent().getContentType();
+    if(inputType == ContentChoiceType::SIGNED_DATA){
+        //TODO 9.3.11.1.4
+    }
+
+}
+
+
+
 EncryptedData* Ieee1609Dot2::SecEncryptedDataRequest(
             Ieee1609Dot2Data* data,
             int dataType,
@@ -137,5 +153,18 @@ EncryptedData* Ieee1609Dot2::SecEncryptedDataConfirm(
 {
 
 }
+
+Ieee1609Dot2::DecryptionResult* Ieee1609Dot2::SecEncryptedDataDecryptionRequest(
+        EncryptedData* data,
+        int cryptomaterialHandle,
+        std::string signedDataRecipientInfo
+        )
+{
+    Ieee1609Dot2::DecryptionResult *result;
+    result->restultCode = DecryptionResultCode::SUCCESS;
+    result->data = data->getCiphertext();
+
+    return result;
+    }
 
 

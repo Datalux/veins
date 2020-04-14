@@ -13,6 +13,20 @@ namespace veins {
 
 
 class VEINS_API Ieee1609Dot2{
+
+    enum DecryptionResultCode {
+        SUCCESS,
+        NO_DECRIPTION_KEY_AVAIBILE,
+        UNSUPPORTED_CRITICAL_INFORMATION_FIELD,
+        COULDNT_DECRYPT_KEY,
+        COULDNT_DECRYPT_DATA,
+        INVALID_FROM_FOR_PLAINTEXT
+    };
+
+    typedef struct {
+        int restultCode;
+        std::string data;
+    } DecryptionResult;
 public:
     Ieee1609Dot2() { }
     Ieee1609Dot2Data* createSPDU(int type, Ieee1609Dot2Data* data);
@@ -20,6 +34,13 @@ public:
     //Ieee1609Dot2Data* createSPDU(int type, std::string content);
 
     std::string processSPDU(Ieee1609Dot2Message* spdu);
+
+    void SecSecureDataPreprocessingRequest(
+            Ieee1609Dot2Data* data,
+            int sdeeID,
+            int psid,
+            bool useP2PCD
+            );
 
     EncryptedData* SecEncryptedDataRequest(
             Ieee1609Dot2Data* data,
@@ -38,6 +59,11 @@ public:
                 std::string signedDataRecipientInfo
                 );
 
+    DecryptionResult* SecEncryptedDataDecryptionRequest(
+            EncryptedData* data,
+            int cryptomaterialHandle,
+            std::string signedDataRecipientInfo
+            );
 
 };
 }
