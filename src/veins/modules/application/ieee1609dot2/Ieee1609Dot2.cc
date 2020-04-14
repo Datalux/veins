@@ -42,8 +42,10 @@ std::string Ieee1609Dot2::processSPDU(Ieee1609Dot2Message* spdu)
         {
             /*encryptedData indicates that the content has been encrypted according to this standard.*/
 
-            ContentEncryptedData encryptedData = spdu->getData().getContent().getEncryptedData();
-            return "encrypted"; //TODO
+            ContentEncryptedData contentEncryptedData = spdu->getData().getContent().getEncryptedData();
+            EncryptedData encryptedData = contentEncryptedData.getEncryptedData();
+            Ieee1609Dot2::DecryptionResult* decrypted = SecEncryptedDataDecryptionRequest(encryptedData, 0, "");
+            return decrypted->data; //TODO
         }
         case ContentChoiceType::SIGNED_CERTIFICATE_REQUEST:
         {
@@ -155,14 +157,14 @@ EncryptedData* Ieee1609Dot2::SecEncryptedDataConfirm(
 }
 
 Ieee1609Dot2::DecryptionResult* Ieee1609Dot2::SecEncryptedDataDecryptionRequest(
-        EncryptedData* data,
+        EncryptedData data,
         int cryptomaterialHandle,
         std::string signedDataRecipientInfo
         )
 {
     Ieee1609Dot2::DecryptionResult *result;
     result->restultCode = DecryptionResultCode::SUCCESS;
-    result->data = data->getCiphertext();
+    result->data = data.getCiphertext();
 
     return result;
     }

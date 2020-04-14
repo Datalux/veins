@@ -60,7 +60,7 @@ public:
                 );
 
     DecryptionResult* SecEncryptedDataDecryptionRequest(
-            EncryptedData* data,
+            EncryptedData data,
             int cryptomaterialHandle,
             std::string signedDataRecipientInfo
             );
