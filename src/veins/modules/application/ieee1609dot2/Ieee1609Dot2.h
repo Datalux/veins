@@ -64,6 +64,11 @@ public:
                 int sdeeID
                 );
 
+    SignedData* SecSignedDataConfirm(
+            int resultCode,
+            SignedData* signedData
+            );
+
     EncryptedData* SecEncryptedDataRequest(
             Ieee1609Dot2Data* data,
             int dataType,
