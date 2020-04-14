@@ -6,7 +6,10 @@
 
 #include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Message_m.h"
 #include "veins/modules/application/ieee1609dot2/EncryptedData_m.h"
+#include "veins/modules/application/ieee1609dot2/SignedData_m.h"
 #include "veins/modules/application/ieee1609dot2/CertificateBase_m.h"
+
+#include "veins/modules/application/ieee1609dot2/HashAlgorithm_m.h"
 
 
 namespace veins {
@@ -41,6 +44,25 @@ public:
             int psid,
             bool useP2PCD
             );
+
+    /* 9.3.9.1 Sec-SignedData.request */
+    SignedData* SecSignedDataRequest(
+                int cryptomaterialHandle,
+                Ieee1609Dot2Data* data,
+                int dataType,
+                std::string externalDataType,
+                int externalDataHashAlgorithm,
+                int psid,
+                bool setGenerationTime,
+                bool setGenerationLocation,
+                int time,
+                int signerIdentifierType,
+                int signerIdentifierCertificateChainLenght,
+                int maximumCertificateChainLength,
+                int ecPointFormat,
+                bool useP2PCD,
+                int sdeeID
+                );
 
     EncryptedData* SecEncryptedDataRequest(
             Ieee1609Dot2Data* data,

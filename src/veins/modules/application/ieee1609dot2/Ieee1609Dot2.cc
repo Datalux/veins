@@ -73,6 +73,12 @@ Ieee1609Dot2Data* Ieee1609Dot2::createSPDU(int type, Ieee1609Dot2Data* data)
         spdu->setContent(data->getContent());
         break;
     }
+    case ContentChoiceType::SIGNED_DATA:
+    {
+        spdu->setContent(data->getContent());
+        break;
+    }
+
     case ContentChoiceType::ENCRYPTED_DATA:
         {
             Ieee1609Dot2Content* content = new Ieee1609Dot2Content();
@@ -126,6 +132,44 @@ void Ieee1609Dot2::SecSecureDataPreprocessingRequest(
         //TODO 9.3.11.1.4
     }
 
+}
+
+SignedData* Ieee1609Dot2::SecSignedDataRequest(
+                int cryptomaterialHandle,
+                Ieee1609Dot2Data* data,
+                int dataType,
+                std::string externalDataType,
+                int externalDataHashAlgorithm,
+                int psid,
+                bool setGenerationTime,
+                bool setGenerationLocation,
+                int time,
+                int signerIdentifierType,
+                int signerIdentifierCertificateChainLenght,
+                int maximumCertificateChainLength,
+                int ecPointFormat,
+                bool useP2PCD,
+                int sdeeID
+                )
+{
+    SignedData *signedData = new SignedData();
+    signedData->setHashID(HashAlgorithm::SHA256);
+
+    ToBeSignedData *tbsData = new ToBeSignedData();
+    SignedDataPayload *signedDataPayload = new SignedDataPayload();
+    signedDataPayload->setData(data);
+    signedDataPayload->setExtDataHash("extDataHash");
+    tbsData->setPayload(*signedDataPayload);
+    HeaderInfo* headerInfo = new HeaderInfo(); //empty HeaderInfo
+    tbsData->setHeaderInfo(*headerInfo);
+
+    SignerIdentifier* signerIdentifier = new SignerIdentifier(); //empty SignerIdentifier
+    signedData->setSigner(*signerIdentifier);
+
+    Signature signature = 0; //empty Signature
+    signedData->setSignature(signature);
+
+    return signedData;
 }
 
 
