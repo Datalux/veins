@@ -19,13 +19,13 @@
 
 cplusplus 
 {{
-typedef int HashAlgorithm;
+#include "HashAlgorithm_m.h"
 }}
 
-class noncobject HashAlgorithm;
+enum HashAlgorithm;
 
 
 packet IssuerIdentifier {
     int sha256AndDigest;
-    HashAlgorithm self;
+    int self @enum(HashAlgorithm);
 }

@@ -21,10 +21,14 @@ cplusplus
 {{
 #include "SignerIdentifier_m.h"
 #include "ToBeSignedData_m.h"
-typedef int HashAlgorithm;
+#include "HashAlgorithm_m.h"
+
 typedef int Signature;
 }}
 
+
+
+enum HashAlgorithm;
 
 class SignerIdentifier;
 class ToBeSignedData;
@@ -34,7 +38,7 @@ class noncobject HashAlgorithm;
 class noncobject Signature;
 
 packet SignedData {
-	HashAlgorithm hashId;
+	int hashID @enum(HashAlgorithm);
 	ToBeSignedData tbsData; //modify
 	SignerIdentifier signer;
 	Signature signature;	

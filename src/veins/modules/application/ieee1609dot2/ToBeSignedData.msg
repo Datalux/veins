@@ -19,7 +19,7 @@
 
 cplusplus
 {{
-  #include "SignedDataPayload_m.h"
+  #include "SignedDataPayload.h"
   #include "HeaderInfo_m.h"
   }}
 
