@@ -1,248 +1,207 @@
-//
-// Copyright (C) 2004 Telecommunication Networks Group (TKN) at Technische Universitaet Berlin, Germany.
-//
-// Documentation for these modules is at http://veins.car2x.org/
-//
-// SPDX-License-Identifier: GPL-2.0-or-later
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
+/* -*- mode:c++ -*- ********************************************************
+ * file:        FWMath.h
+ *
+ * author:      Christian Frank
+ *
+ * copyright:   (C) 2004 Telecommunication Networks Group (TKN) at
+ *              Technische Universitaet Berlin, Germany.
+ *
+ *              This program is free software; you can redistribute it
+ *              and/or modify it under the terms of the GNU General Public
+ *              License as published by the Free Software Foundation; either
+ *              version 2 of the License, or (at your option) any later
+ *              version.
+ *              For further information see file COPYING
+ *              in the top level directory
+ ***************************************************************************
+ * part of:     framework implementation developed by tkn
+ **************************************************************************/
 
-// author:      Christian Frank
-// part of:     framework implementation developed by tkn
+/**
+ * @file FWMath.h
+ * @author Christian Frank
+ * @brief Support functions for mathematical operations.
+ **/
 
-#pragma once
-
-//
-// Support functions for mathematical operations
-//
+#ifndef FWMATH_H
+#define FWMATH_H
 
 #include <cmath>
-#include <limits>
-#include <type_traits>
 
-#include "veins/veins.h"
-
-namespace veins {
-
-/* Windows math.h doesn't define the the following variables: */
-#ifndef M_E
-#define M_E 2.7182818284590452354
-#endif
-
-#ifndef M_LOG2E
-#define M_LOG2E 1.4426950408889634074
-#endif
-
-#ifndef M_LOG10E
-#define M_LOG10E 0.43429448190325182765
-#endif
-
-#ifndef M_LN2
-#define M_LN2 0.69314718055994530942
-#endif
-
-#ifndef M_LN10
-#define M_LN10 2.30258509299404568402
-#endif
+#include "MiXiMDefs.h"
 
 #ifndef M_PI
+/** @brief Windows math.h doesn't define the PI variable so we have to do it
+ * by hand.*/
 #define M_PI 3.14159265358979323846
 #endif
 
-#ifndef M_PI_2
-#define M_PI_2 1.57079632679489661923
-#endif
-
-#ifndef M_PI_4
-#define M_PI_4 0.78539816339744830962
-#endif
-
-#ifndef M_1_PI
-#define M_1_PI 0.31830988618379067154
-#endif
-
-#ifndef M_2_PI
-#define M_2_PI 0.63661977236758134308
-#endif
-
-#ifndef M_2_SQRTPI
-#define M_2_SQRTPI 1.12837916709551257390
-#endif
-
 #ifndef M_SQRT2
+/** @brief Windows math.h doesn't define sqrt(2) so we have to do it by
+ * hand. */
 #define M_SQRT2 1.41421356237309504880
 #endif
 
-#ifndef M_SQRT1_2
-#define M_SQRT1_2 0.70710678118654752440
-#endif
-
-/* Constant for comparing doubles. Two doubles at most epsilon apart
-   are declared equal.*/
 #ifndef EPSILON
-#define EPSILON 0.001
+/** @brief Constant for comparing doubles. Two doubles at most epsilon apart
+ * are declared equal.*/
+#define EPSILON 0.00001
 #endif
 
-namespace math {
+/* Provide function substitutes for Win32 architectures. */
+/*
+#ifdef _WIN32
+#ifndef _MINGW
+#include <float.h>
+#define finite	_finite
+#define isnan	_isnan
+#define erf(X)	FWMath::erf(X)
+#define erfc(X)	FWMath::erfc(X)
+#endif
+#endif
+*/
 
-/**
- * Compare two floats for approximate equality
- *
- * Floating point numbers are prone to inequalities.
- * Expressions that logically result in the same values therefore often are not exactly equal, because two representations of very similar values are computed.
- * This function allows comparisons for such cases by allowing for a small error (epsilon), without considering numbers to be unequal.
- *
- * @param x First comparand
- * @param y Second comparand
- * @param ulp
- *      How many ULP's (Units in the Last Place) we want to tolerate when comparing two numbers.
- *      The larger the value, the more error we allow.
- *      The maximum floating point error on most platforms is below 0.5 ULP.
- *      A 0 value means that two numbers must be exactly the same to be considered equal.
- * @return Indicator whether the lhs and rhs are virtually equal
- */
-template <class T>
-typename std::enable_if<std::is_floating_point<T>::value, bool>::type
-almost_equal(T x, T y, int ulp = 1)
-{
-    const T epsilon = std::numeric_limits<T>::epsilon();
-    const T delta = std::abs(x - y);
-    return (delta <= epsilon * std::abs(x + y) * ulp) || (delta < std::numeric_limits<T>::min());
-}
-
-} // namespace math
+#ifdef __APPLE__
+#define isnan(x) ((x) != (x))
+#endif
 
 /**
  * @brief Support functions for mathematical operations.
  *
  * This class contains all kind of mathematical support functions
  *
- * @ingroup basicUtils
+ * @ingroup baseUtils
  * @ingroup utils
  * @author Christian Frank
  */
-class VEINS_API FWMath {
-
+class MIXIM_API FWMath
+{
 public:
+
     /**
      * Returns the rest of a whole-numbered division.
      */
-    static double mod(double dividend, double divisor)
-    {
+    static double mod(double dividend, double divisor) {
         double i;
-        return modf(dividend / divisor, &i) * divisor;
+        return modf(dividend/divisor, &i)*divisor;
     }
 
     /**
      * Returns the result of a whole-numbered division.
      */
-    static double div(double dividend, double divisor)
-    {
+    static double div(double dividend, double divisor) {
         double i;
-        modf(dividend / divisor, &i);
+        /*double f;
+        f=*/modf(dividend/divisor, &i);
         return i;
     }
 
     /**
-     * Returns the remainder r on division of dividend a by divisor n,
+     * @brief Returns the remainder r on division of dividend a by divisor n,
      * using floored division. The remainder r has the same sign as the divisor n.
+     *
      */
-    static double modulo(double a, double n)
-    {
-        return (a - n * floor(a / n));
+    static double modulo(double a, double n) {
+		return (a - n * floor(a/n));
     }
 
     /**
      * Tests whether two doubles are close enough to be declared equal.
-     * Returns true if parameters are at most epsilon apart, false
+     * @return true if parameters are at most epsilon apart, false
      * otherwise
-     *
-     * @deprecated
-     * @see veins::math::almost_equal
      */
-    VEINS_DEPRECATED static bool close(double one, double two)
-    {
-        return fabs(one - two) < EPSILON;
+    static bool close(double one, double two) {
+        return fabs(one-two)<EPSILON;
     }
 
     /**
-     * Returns 0 if i is close to 0, 1 if i is positive and greater than epsilon,
-     * or -1 if it is negative and less than epsilon.
+     * @return 0 if i is close to 0, 1 if i is positive greater epsilon,
+     * -1 if it is negative smaller epsilon.
      */
-    static int stepfunction(double i)
-    {
-        if (math::almost_equal<double>(i, 0)) {
-            return 0;
-        }
+    static int stepfunction(double i) { return (i>EPSILON) ? 1 : close(i,0) ? 0 :-1; };
 
-        if (std::signbit(i) == 1) {
-            return -1;
-        }
-        else {
-            return 1;
-        }
-    };
 
     /**
-     * Returns 1 if the parameter is greater or equal to zero, -1 otherwise
+     * @return 1 if parameter greater or equal zero, -1 otherwise
      */
-    static int sign(double i)
-    {
-        return (i >= 0) ? 1 : -1;
-    };
+    static int sign(double i) { return (i>=0)? 1 : -1; };
 
     /**
-     * Returns an integer that corresponds to rounded double parameter
+     * @return integer that corresponds to rounded double parameter
      */
-    static int round(double d)
-    {
-        return (int) (ceil(d - 0.5));
+    static int round(double d) { return (int)(ceil(d-0.5)); }
+
+    /**
+     * @return the to the nearest integer towards zero rounded parameter as double
+     */
+    static double floorToZero(double d) { return (d >= 0.0)? floor(d) : ceil(d); }
+
+    /**
+     * @return greater of the given parameters
+     */
+    static double max(double a, double b) { return (a<b)? b : a; }
+
+    /**
+     * @return smaller of the given parameters
+     */
+    static double min(double a, double b) { return (a>b)? b : a; }
+
+    /**
+     * convert a dBm value into milli Watt
+     */
+    static double dBm2mW(double dBm){
+        return pow(10.0, dBm/10.0);
     }
 
     /**
-     * Discards the fractional part of the parameter, e.g. -3.8 becomes -3
-     */
-    static double floorToZero(double d)
-    {
-        return (d >= 0.0) ? floor(d) : ceil(d);
-    }
+     * @brief Convert an mW value to dBm.
+     **/
+	static double mW2dBm(double mW) { return (10 * log10(mW)); }
 
     /**
-     * Returns the greater of the given parameters
+     * helper function, returns squared euclidean distance
+     * makes code less messy
      */
-    static double max(double a, double b)
-    {
-        return (a < b) ? b : a;
+    static double torDist(double x1, double x2, double y1, double y2) {
+        return (x1-x2) * (x1-x2) + (y1-y2) * (y1-y2);
     }
 
-    /**
-     * Converts a dBm value into milliwatts
-     */
-    static double dBm2mW(double dBm)
-    {
-        return pow(10.0, dBm / 10.0);
-    }
+	//TODO: resolve "extra qualification"-error for "erf" and "erfc" with mingw
+	/**
+	 * @brief Complementary error function.
+	 **/
+	static double erfc(double x) {
+		double t, u, y;
 
-    /**
-     * Convert a mW value to dBm.
-     */
-    static double mW2dBm(double mW)
-    {
-        return (10 * log10(mW));
-    }
+		if (x <= -6.0)
+			return 2.0;
+		if (x >= 6.0)
+			return 0.0;
+
+		t = 3.97886080735226 / (fabs(x) + 3.97886080735226);
+		u = t - 0.5;
+		y = (((((((((0.00127109764952614092 * u + 1.19314022838340944e-4) * u -
+			0.003963850973605135) * u - 8.70779635317295828e-4) * u +
+			0.00773672528313526668) * u + 0.00383335126264887303) * u -
+			0.0127223813782122755) * u - 0.0133823644533460069) * u +
+			0.0161315329733252248) * u + 0.0390976845588484035) * u +
+			0.00249367200053503304;
+		y = ((((((((((((y * u - 0.0838864557023001992) * u -
+			0.119463959964325415) * u + 0.0166207924969367356) * u +
+			0.357524274449531043) * u + 0.805276408752910567) * u +
+			1.18902982909273333) * u + 1.37040217682338167) * u +
+			1.31314653831023098) * u + 1.07925515155856677) * u +
+			0.774368199119538609) * u + 0.490165080585318424) * u +
+			0.275374741597376782) * t * exp(-x * x);
+
+		return x < 0.0 ? 2.0 - y : y;
+	}
+
+	/**
+	 * @brief Error function.
+	 **/
+	//static double erf(double x) { return 1.0 - erfc(x); }
+
 };
 
-} // namespace veins
+#endif

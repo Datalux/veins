@@ -1,5 +1,5 @@
 //**************************************************************************
-// * file:        MacPkt.msg
+// * file:        ApplPkt.msg
 // *
 // * author:      Daniel Willkomm
 // *
@@ -15,26 +15,24 @@
 // *              in the top level directory
 // **************************************************************************
 // * part of:     framework implementation developed by tkn
-// * description: - base class for MAC layer packets
-// *              - subclass to create your own MAC layer packets
+// * description: - base class for application layer packets
+// *              - subclass to create your own application layer packets
 // **************************************************************************/
 
 cplusplus {{
     #include "SimpleAddress.h"
 }}
 
-class LAddress::L2Type extends void;
+class LAddress::L3Type extends void;
 
-// A basic MAC (Media Access Control) packet format definition
-// 
-// subclass if you want to create your own MAC layer packet class
+// Basic application packet definition
 //
-// The basic MAC packet only provides source and destination address
+// subclass if you want to create your own application layer packet
+// class
 //
 // @author Daniel Willkomm
-packet MacPkt
+packet ApplPkt
 {
-    LAddress::L2Type destAddr; // destination mac address
-    LAddress::L2Type srcAddr;  // source mac address
-    long             sequenceId; // Sequence Number to detect duplicate messages
+    LAddress::L3Type destAddr = LAddress::L3BROADCAST; // destination address
+    LAddress::L3Type srcAddr  = LAddress::L3BROADCAST; // source address
 }
