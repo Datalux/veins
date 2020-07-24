@@ -28,7 +28,7 @@ void Ieee1609Dot2ALL::initialize(int stage)
     }
 }
 
-Ieee1609Dot2Data* Ieee1609Dot2ALL::createUnsecureDataFormString(const char* msg){
+Ieee1609Dot2Data* Ieee1609Dot2ALL::createUnsecureDataFromString(const char* msg){
     Ieee1609Dot2Data* data = new Ieee1609Dot2Data();
     data->setProtocolVersion(3);
 
@@ -44,8 +44,45 @@ Ieee1609Dot2Data* Ieee1609Dot2ALL::createUnsecureDataFormString(const char* msg)
 
     data->setContent(*content);
     return data;
-    //content->setUnsecuredData(*contentUnsecuredData);
 
+}
+
+Ieee1609Dot2Data* Ieee1609Dot2ALL::createEncryptedDataFromString(const char* msg){
+    Ieee1609Dot2Data* data = new Ieee1609Dot2Data();
+    data->setProtocolVersion(3);
+
+    Ieee1609Dot2Content* content = new Ieee1609Dot2Content();
+    content->setContentType(ContentChoiceType::ENCRYPTED_DATA);
+
+    ContentEncryptedData* contentEncryptedData = new ContentEncryptedData();
+    EncryptedData* encryptedData = new EncryptedData();
+    encryptedData->setCiphertext(msg);
+    encryptedData->setRecipients("");
+
+    contentEncryptedData->setEncryptedData(*encryptedData);
+    content->setEncryptedData(*contentEncryptedData);
+
+    data->setContent(*content);
+    return data;
+}
+
+Ieee1609Dot2Data* Ieee1609Dot2ALL::createSignedDataFromString(const char* msg){
+    Ieee1609Dot2Data* data = new Ieee1609Dot2Data();
+    data->setProtocolVersion(3);
+
+    Ieee1609Dot2Content* content = new Ieee1609Dot2Content();
+    content->setContentType(ContentChoiceType::SIGNED_DATA);
+
+    ContentSignedData* contentSignedData = new ContentSignedData();
+    SignedData* signedData = new SignedData();
+
+    // initialize signedData
+
+    contentSignedData->setSignedData(*signedData);
+    content->setSignedData(*contentSignedData);
+
+    data->setContent(*content);
+    return data;
 }
 
 void Ieee1609Dot2ALL::onWSA(DemoServiceAdvertisment* wsa)
@@ -111,7 +148,7 @@ void Ieee1609Dot2ALL::handlePositionUpdate(cObject* obj)
             Ieee1609Dot2Message* wsm = new Ieee1609Dot2Message();
             populateWSM(wsm);
 
-            Ieee1609Dot2Data* unsecuredData = createUnsecureDataFormString(mobility->getRoadId().c_str());
+            Ieee1609Dot2Data* unsecuredData = createUnsecureDataFromString(mobility->getRoadId().c_str());
             wsm->setData(*(ieee1609Dot2->createSPDU(ContentChoiceType::UNSECURE_DATA, unsecuredData)));
 
 

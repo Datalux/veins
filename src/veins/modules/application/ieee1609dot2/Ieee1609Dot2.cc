@@ -23,40 +23,30 @@ std::string Ieee1609Dot2::processSPDU(Ieee1609Dot2Message* spdu)
         int checkType = spdu->getData().getContent().getContentType();
 
         switch (checkType) {
-        case ContentChoiceType::UNSECURE_DATA:
-        {
-            /*unsecuredData indicates that the content is an OCTET STRING to be consumed outside the
-            SDS.*/
+            case ContentChoiceType::UNSECURE_DATA:
+            {
+                ContentUnsecuredData unsecuredData = spdu->getData().getContent().getUnsecuredData();
+                return unsecuredData.getUnsecuredData().getUnsecuredData();
+            }
+            case ContentChoiceType::SIGNED_DATA:
+            {
+                ContentSignedData signedData = spdu->getData().getContent().getSignedData();
+                return std::to_string(signedData.getSignedData().getSignature());
 
-            ContentUnsecuredData unsecuredData = spdu->getData().getContent().getUnsecuredData();
-            return unsecuredData.getUnsecuredData().getUnsecuredData();
-        }
-        case ContentChoiceType::SIGNED_DATA:
-        {
-            /*signedData indicates that the content has been signed according to this standard.*/
-
-            ContentEncryptedData encryptedData = spdu->getData().getContent().getEncryptedData();
-            return "signed"; //TODO
-        }
-        case ContentChoiceType::ENCRYPTED_DATA:
-        {
-            /*encryptedData indicates that the content has been encrypted according to this standard.*/
-
-            ContentEncryptedData contentEncryptedData = spdu->getData().getContent().getEncryptedData();
-            EncryptedData encryptedData = contentEncryptedData.getEncryptedData();
-            Ieee1609Dot2::DecryptionResult* decrypted = SecEncryptedDataDecryptionRequest(encryptedData, 0, "");
-            return decrypted->data; //TODO
-        }
-        case ContentChoiceType::SIGNED_CERTIFICATE_REQUEST:
-        {
-            /*signedCertificateRequest indicates that the content is a certificate request. Further
-            specification of certificate requests is not provided in this version of this standard.*/
-
-            ContentSignedCertificateRequest signedCertificateRequest = spdu->getData().getContent().getSignedCertificateRequest();
-            delete(spdu);
-            return "sigendCertificateRequest";
-        }
-
+            }
+            case ContentChoiceType::ENCRYPTED_DATA:
+            {
+                ContentEncryptedData contentEncryptedData = spdu->getData().getContent().getEncryptedData();
+                EncryptedData encryptedData = contentEncryptedData.getEncryptedData();
+                Ieee1609Dot2::DecryptionResult* decrypted = SecEncryptedDataDecryptionRequest(encryptedData, 0, "");
+                return decrypted->data;
+            }
+            case ContentChoiceType::SIGNED_CERTIFICATE_REQUEST:
+            {
+                ContentSignedCertificateRequest signedCertificateRequest = spdu->getData().getContent().getSignedCertificateRequest();
+                delete(spdu);
+                return signedCertificateRequest.getSignedCertificateRequest();
+            }
         }
     }
 }
