@@ -19,11 +19,11 @@
 
 cplusplus 
 {{
-#include "ContentChoiceType_m.h"
-#include "ContentUnsecuredData_m.h"
-#include "ContentEncryptedData_m.h"
-#include "ContentSignedCertificateRequest_m.h"
-#include "ContentSignedData_m.h"
+#include "../ContentChoiceType_m.h"
+#include "../ContentUnsecuredData_m.h"
+#include "../ContentEncryptedData_m.h"
+#include "../ContentSignedCertificateRequest_m.h"
+#include "../ContentSignedData_m.h"
 
 }}
 

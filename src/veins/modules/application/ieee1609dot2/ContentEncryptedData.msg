@@ -19,7 +19,7 @@
 
 cplusplus
 {{
-#include "EncryptedData_m.h"
+#include "encrypted_data/EncryptedData_m.h"
 #include "ContentChoice_m.h"  
 }}
 

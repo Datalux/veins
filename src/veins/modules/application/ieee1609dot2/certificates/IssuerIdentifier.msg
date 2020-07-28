@@ -17,16 +17,15 @@
 // TODO generated message class
 //
 
-cplusplus {{
-#include "CertificateBase_m.h"
-typedef std::vector<CertificateBase> SequenceOfCertificate;
+cplusplus 
+{{
+#include "../data_types/HashAlgorithm_m.h"
 }}
 
-class noncobject SequenceOfCertificate;
+enum HashAlgorithm;
 
 
-packet SignerIdentifier {
-    char digest[8];
-    SequenceOfCertificate certificate; 
-	int self;
+packet IssuerIdentifier {
+    int sha256AndDigest;
+    int self @enum(HashAlgorithm);
 }

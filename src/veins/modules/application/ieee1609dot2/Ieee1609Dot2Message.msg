@@ -17,7 +17,7 @@
 cplusplus {{
 #include "veins/modules/messages/BaseFrame1609_4_m.h"
 #include "veins/base/utils/SimpleAddress.h"
-#include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Data_m.h"
+#include "veins/modules/application/ieee1609dot2/secured_data/Ieee1609Dot2Data_m.h"
 }}
 
 namespace veins;

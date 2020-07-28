@@ -16,16 +16,17 @@
 //
 // TODO generated message class
 //
-cplusplus
-{{
-#include "secured_data/SignedData_m.h"
-#include "ContentChoice_m.h"  
+
+cplusplus {{
+#include "../certificates/CertificateBase_m.h"
+typedef std::vector<CertificateBase> SequenceOfCertificate;
 }}
 
-class ContentChoice;
-class SignedData;
+class noncobject SequenceOfCertificate;
 
-packet ContentSignedData extends ContentChoice{
-    contentType = SIGNED_DATA;
-    SignedData signedData;
+
+packet SignerIdentifier {
+    char digest[8];
+    SequenceOfCertificate certificate; 
+	int self;
 }

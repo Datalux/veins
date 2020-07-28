@@ -15,7 +15,7 @@
 
 cplusplus 
 {{
- #include "CertificateBase_m.h"   
+ #include "certificates/CertificateBase_m.h"   
 }}
 
 class noncobject CertificateBase;

@@ -17,28 +17,29 @@
 // TODO generated message class
 //
 
-cplusplus
+cplusplus 
 {{
-    #include "MissingCrlIdentifier_m.h"
-    #include "EncryptionKey_m.h"
-    #include "location/ThreeDLocation_m.h"
-    typedef int Psid;
-    typedef uint64_t Time64;
+#include "SignerIdentifier_m.h"
+#include "ToBeSignedData_m.h"
+#include "../data_types/HashAlgorithm_m.h"
+
+typedef int Signature;
 }}
 
-class noncobject Psid;
-class noncobject Time64;
-class ThreeDLocation;
 
-class MissingCrlIdentifier;
-class EncryptionKey;
 
-packet HeaderInfo {
-    Psid psid;
-    Time64 generationTime;
-    Time64 expiryTime;
-    ThreeDLocation generationLocation;
-    char p2pcdLearningRequest[3]; //HashedId3
-    MissingCrlIdentifier missingCrlIdentifier;
-    EncryptionKey encryptionKey;
+enum HashAlgorithm;
+
+class SignerIdentifier;
+class ToBeSignedData;
+
+
+class noncobject HashAlgorithm;
+class noncobject Signature;
+
+packet SignedData {
+	int hashID @enum(HashAlgorithm);
+	ToBeSignedData tbsData; //modify
+	SignerIdentifier signer;
+	Signature signature;	
 }

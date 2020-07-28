@@ -5,11 +5,11 @@
 #include <omnetpp.h>
 
 #include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Message_m.h"
-#include "veins/modules/application/ieee1609dot2/EncryptedData_m.h"
-#include "veins/modules/application/ieee1609dot2/SignedData_m.h"
-#include "veins/modules/application/ieee1609dot2/CertificateBase_m.h"
+#include "veins/modules/application/ieee1609dot2/encrypted_data/EncryptedData_m.h"
+#include "veins/modules/application/ieee1609dot2/secured_data/SignedData_m.h"
+#include "veins/modules/application/ieee1609dot2/certificates/CertificateBase_m.h"
 
-#include "veins/modules/application/ieee1609dot2/HashAlgorithm_m.h"
+#include "veins/modules/application/ieee1609dot2/data_types/HashAlgorithm_m.h"
 
 
 namespace veins {
