@@ -15,5 +15,5 @@
 
 packet RegionAndSubregions {
 	uint8_t region;
-	utin16_t subregions[]; //SequenceOfUint16
+	uint16_t subregions[]; //SequenceOfUint16
 }

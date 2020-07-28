@@ -17,19 +17,19 @@ cplusplus
 #include "CircularRegion_m.h"  
 #include "SequenceOfRectangularRegion_m.h"  
 #include "PolygonalRegion_m.h"  
-#include "SequenceOfIdentifiedRegion_m.h"  
+#include "IdentifiedRegion_m.h"  
 
 }}
 
 class CircularRegion;
 class SequenceOfRectangularRegion;
 class PolygonalRegion;
-class SequenceOfIdentifiedRegion;
+class IdentifiedRegion;
 
 
 packet GeographicRegion {
     CircularRegion circularRegion;
     SequenceOfRectangularRegion rectangularRegion;
     PolygonalRegion polygonalRegion;
-    SequenceOfIdentifiedRegion identifiedRegion;    
+    IdentifiedRegion identifiedRegion[]; //SequenceOfIdentifiedRegion   
 }

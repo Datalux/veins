@@ -21,7 +21,7 @@ cplusplus
 {{
     #include "MissingCrlIdentifier_m.h"
     #include "EncryptionKey_m.h"
-    #include "ThreeDLocation_m.h"
+    #include "location/ThreeDLocation_m.h"
     typedef int Psid;
     typedef uint64_t Time64;
 }}
