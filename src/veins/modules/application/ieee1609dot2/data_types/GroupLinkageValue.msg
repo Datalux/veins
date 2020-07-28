@@ -13,18 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-cplusplus
-{{
-    #include "LinkageData_m.h"
-
-}}
-
-
-class LinkageData;
-
-packet CertificateId {
-    LinkageData linkageData; // LinkageData
-    string hostname; // Hostname
-    string binaryId; 
-    string none; // NULL    
+packet GroupLinkageValue {
+    char jValue[4];
+    char value[9];    
 }

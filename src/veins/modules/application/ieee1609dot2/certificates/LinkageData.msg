@@ -12,19 +12,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-
 cplusplus
 {{
-    #include "LinkageData_m.h"
+    #include "../data_types/GroupLinkageValue_m.h"
 
 }}
 
+class noncobject GroupLinkageValue;
 
-class LinkageData;
-
-packet CertificateId {
-    LinkageData linkageData; // LinkageData
-    string hostname; // Hostname
-    string binaryId; 
-    string none; // NULL    
+packet LinkageData {
+    uint16_t iCert; //IValue
+    char linkageValue[9]; //LinkageValue
+    GroupLinkageValue groupLinkageValue; //OPTIONAL
+    
+    
 }
