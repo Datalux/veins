@@ -5,7 +5,7 @@
  *      Author: giuseppe
  */
 
-#include <veins/modules/application/ieee1609dot2/SignedDataPayload.h>
+#include <veins/modules/application/ieee1609dot2/secured_data/SignedDataPayload.h>
 
 SignedDataPayload::SignedDataPayload() {
     // TODO Auto-generated constructor stub

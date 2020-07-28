@@ -8,7 +8,7 @@
 #ifndef SRC_VEINS_MODULES_APPLICATION_IEEE1609DOT2_SIGNEDDATAPAYLOAD_H_
 #define SRC_VEINS_MODULES_APPLICATION_IEEE1609DOT2_SIGNEDDATAPAYLOAD_H_
 
-#include "veins/modules/application/ieee1609dot2/SignedDataPayload_m.h"
+#include "veins/modules/application/ieee1609dot2/secured_data/SignedDataPayload_m.h"
 //#include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Data_m.h"
 
 class Ieee1609Dot2Data;

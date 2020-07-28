@@ -13,15 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-cplusplus 
-{{
- #include "CertificateBase_m.h"   
-}}
-
-class noncobject CertificateBase;
-
-packet Ieee1609dot2Peer2PeerPDU {
- 	uint8_t version;
- 	CertificateBase caCerts[]; // CaCertP2pPDU::= SEQUENCE OF Certificate
- 	 
+packet GroupLinkageValue {
+    char jValue[4];
+    char value[9];    
 }

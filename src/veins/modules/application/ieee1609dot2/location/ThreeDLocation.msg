@@ -11,21 +11,10 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-//
-// TODO generated message class
 //
 
-cplusplus 
-{{
-#include "HashAlgorithm_m.h"
-}}
-
-enum HashAlgorithm;
-
-
-packet IssuerIdentifier {
-    int sha256AndDigest;
-    int self @enum(HashAlgorithm);
+packet ThreeDLocation {
+    int latitude; //Latitude
+    int longitude; //Longitude
+    uint16_t elevation; //Elevation      
 }

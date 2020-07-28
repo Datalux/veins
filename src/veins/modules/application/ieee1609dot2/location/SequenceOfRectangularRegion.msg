@@ -11,34 +11,15 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-//
-// TODO generated message class
 //
 
-cplusplus
+cplusplus 
 {{
-    #include "MissingCrlIdentifier_m.h"
-    #include "EncryptionKey_m.h"
-    #include "ThreeDLocation_m.h"
-    typedef int Psid;
-    typedef uint64_t Time64;
+#include "RectangularRegion_m.h"  
 }}
 
-class noncobject Psid;
-class noncobject Time64;
-class ThreeDLocation;
+class RectangularRegion;
 
-class MissingCrlIdentifier;
-class EncryptionKey;
-
-packet HeaderInfo {
-    Psid psid;
-    Time64 generationTime;
-    Time64 expiryTime;
-    ThreeDLocation generationLocation;
-    char p2pcdLearningRequest[3]; //HashedId3
-    MissingCrlIdentifier missingCrlIdentifier;
-    EncryptionKey encryptionKey;
+packet SequenceOfRectangularRegion {
+    RectangularRegion rectangularRegion[];
 }

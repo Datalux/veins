@@ -7,7 +7,7 @@
 
 #include <veins/modules/application/ieee1609dot2/Ieee1609Dot2RSU.h>
 
-#include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Message_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/Ieee1609Dot2Message_m.h"
 
 using namespace veins;
 

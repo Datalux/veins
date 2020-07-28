@@ -11,22 +11,17 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-//
-// TODO generated message class
 //
 
-cplusplus {{
-#include "CertificateBase_m.h"
-typedef std::vector<CertificateBase> SequenceOfCertificate;
+cplusplus 
+{{
+ #include "../certificates/CertificateBase_m.h"   
 }}
 
-class noncobject SequenceOfCertificate;
+class noncobject CertificateBase;
 
-
-packet SignerIdentifier {
-    char digest[8];
-    SequenceOfCertificate certificate; 
-	int self;
+packet Ieee1609dot2Peer2PeerPDU {
+ 	uint8_t version;
+ 	CertificateBase caCerts[]; // CaCertP2pPDU::= SEQUENCE OF Certificate
+ 	 
 }

@@ -11,13 +11,21 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
 
-//
-// TODO generated message class
-//
-packet ThreeDLocation {
-    int latitude;
-    int longitude;
-    uint16_t elevation;
+cplusplus 
+{{
+#include "CountryAndRegions_m.h"
+#include "CountryAndSubregions_m.h"  
+  
+}}
+
+class CountryAndRegions;
+class CountryAndSubregions;
+
+
+packet IdentifiedRegion {
+	uint16_t countryOnly; //CountryOnly
+	CountryAndRegions countryAndRagions;
+	CountryAndSubregions countryAndSubregions;
 }

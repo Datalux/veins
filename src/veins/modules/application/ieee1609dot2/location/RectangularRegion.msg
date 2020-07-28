@@ -13,9 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-packet CertificateId {
-    string linkageData; // LinkageData
-    string hostname; // Hostname
-    string binaryId; 
-    string none; // NULL    
+cplusplus 
+{{
+#include "TwoDLocation_m.h"  
+}}
+
+class TwoDLocation;
+
+packet RectangularRegion{
+    TwoDLocation northWest;
+    TwoDLocation southEast;    
 }

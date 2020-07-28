@@ -11,35 +11,19 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 //
-// TODO generated message class
-//
-
-cplusplus 
+cplusplus
 {{
-#include "SignerIdentifier_m.h"
-#include "ToBeSignedData_m.h"
-#include "HashAlgorithm_m.h"
+    #include "../data_types/GroupLinkageValue_m.h"
 
-typedef int Signature;
 }}
 
+class noncobject GroupLinkageValue;
 
-
-enum HashAlgorithm;
-
-class SignerIdentifier;
-class ToBeSignedData;
-
-
-class noncobject HashAlgorithm;
-class noncobject Signature;
-
-packet SignedData {
-	int hashID @enum(HashAlgorithm);
-	ToBeSignedData tbsData; //modify
-	SignerIdentifier signer;
-	Signature signature;	
+packet LinkageData {
+    uint16_t iCert; //IValue
+    char linkageValue[9]; //LinkageValue
+    GroupLinkageValue groupLinkageValue; //OPTIONAL
+    
+    
 }

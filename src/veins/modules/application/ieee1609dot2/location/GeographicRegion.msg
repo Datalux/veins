@@ -12,23 +12,24 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+cplusplus 
+{{
+#include "CircularRegion_m.h"  
+#include "SequenceOfRectangularRegion_m.h"  
+#include "PolygonalRegion_m.h"  
+#include "IdentifiedRegion_m.h"  
 
-
-cplusplus {{
-#include "veins/modules/messages/BaseFrame1609_4_m.h"
-#include "veins/base/utils/SimpleAddress.h"
-#include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Data_m.h"
 }}
 
-namespace veins;
+class CircularRegion;
+class SequenceOfRectangularRegion;
+class PolygonalRegion;
+class IdentifiedRegion;
 
-class BaseFrame1609_4;
-class Ieee1609Dot2Data;
-class LAddress::L2Type extends void;
 
-packet Ieee1609Dot2Message extends BaseFrame1609_4 {
-    Ieee1609Dot2Data data;
-    LAddress::L2Type senderAddress = -1;
-    int serial = 0;
+packet GeographicRegion {
+    CircularRegion circularRegion;
+    SequenceOfRectangularRegion rectangularRegion;
+    PolygonalRegion polygonalRegion;
+    IdentifiedRegion identifiedRegion[]; //SequenceOfIdentifiedRegion   
 }
-

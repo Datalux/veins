@@ -11,22 +11,9 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-//
-// TODO generated message class
 //
 
-cplusplus
-{{
-#include "EncryptedData_m.h"
-#include "ContentChoice_m.h"  
-}}
-
-class ContentChoice;
-class EncryptedData;
-
-packet ContentEncryptedData extends ContentChoice{
-    contentType = ENCRYPTED_DATA;
-    EncryptedData encryptedData;
+packet CountryAndRegions {
+	uint16_t countryOnly; //CountryOnly
+	uint8_t regions[]; //SequenceOfUint8
 }

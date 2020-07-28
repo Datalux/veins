@@ -11,21 +11,14 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 //
-// TODO generated message class
-//
-cplusplus
-{{
-#include "SignedData_m.h"
-#include "ContentChoice_m.h"  
-}}
 
-class ContentChoice;
-class SignedData;
-
-packet ContentSignedData extends ContentChoice{
-    contentType = SIGNED_DATA;
-    SignedData signedData;
+packet Duration {
+    uint16_t microseconds;
+    uint16_t milliseconds;
+    uint16_t seconds;
+    uint16_t minutes;
+    uint16_t hours;
+    uint16_t sixtyHours;
+    uint16_t years;
 }
