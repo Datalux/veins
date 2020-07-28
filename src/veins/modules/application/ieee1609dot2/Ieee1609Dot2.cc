@@ -2,14 +2,14 @@
 #include "veins/modules/application/ieee80211p/DemoBaseApplLayer.h"
 
 #include "veins/modules/application/ieee1609dot2/Ieee1609Dot2.h"
-#include "veins/modules/application/ieee1609dot2/Ieee1609Dot2Message_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/Ieee1609Dot2Message_m.h"
 
-#include "veins/modules/application/ieee1609dot2/ContentUnsecuredData_m.h"
-#include "veins/modules/application/ieee1609dot2/ContentSignedData_m.h"
-#include "veins/modules/application/ieee1609dot2/ContentEncryptedData_m.h"
-#include "veins/modules/application/ieee1609dot2/ContentSignedCertificateRequest_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/ContentUnsecuredData_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/ContentSignedData_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/ContentEncryptedData_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/ContentSignedCertificateRequest_m.h"
 
-#include "veins/modules/application/ieee1609dot2/ContentChoiceType_m.h"
+#include "veins/modules/application/ieee1609dot2/messages_type/ContentChoiceType_m.h"
 
 
 using namespace veins;

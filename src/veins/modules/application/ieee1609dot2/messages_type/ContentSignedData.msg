@@ -11,17 +11,21 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
 
-cplusplus 
+//
+// TODO generated message class
+//
+cplusplus
 {{
- #include "certificates/CertificateBase_m.h"   
+#include "../secured_data/SignedData_m.h"
+#include "ContentChoice_m.h"  
 }}
 
-class noncobject CertificateBase;
+class ContentChoice;
+class SignedData;
 
-packet Ieee1609dot2Peer2PeerPDU {
- 	uint8_t version;
- 	CertificateBase caCerts[]; // CaCertP2pPDU::= SEQUENCE OF Certificate
- 	 
+packet ContentSignedData extends ContentChoice{
+    contentType = SIGNED_DATA;
+    SignedData signedData;
 }
