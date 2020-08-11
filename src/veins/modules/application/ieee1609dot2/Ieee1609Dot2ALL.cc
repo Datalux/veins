@@ -92,7 +92,8 @@ void Ieee1609Dot2ALL::onWSM(BaseFrame1609_4* frame)
 }
 
 void Ieee1609Dot2ALL::onBSM(DemoSafetyMessage* bsm){
-
+    Ieee1609Dot2Message* message = check_and_cast<Ieee1609Dot2Message*>(bsm);
+    SafetyBSM returnedData = ieee1609Dot2->processSPDU(message);
 }
 
 void Ieee1609Dot2ALL::handleSelfMsg(cMessage* msg)
