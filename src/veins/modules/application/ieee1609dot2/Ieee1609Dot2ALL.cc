@@ -88,7 +88,7 @@ void Ieee1609Dot2ALL::onWSA(DemoServiceAdvertisment* wsa)
 void Ieee1609Dot2ALL::onWSM(BaseFrame1609_4* frame)
 {
     Ieee1609Dot2Message* wsm = check_and_cast<Ieee1609Dot2Message*>(frame);
-    std::string returnedData = ieee1609Dot2->processSPDU(wsm);
+    SafetyBSM returnedData = ieee1609Dot2->processSPDU(wsm);
 }
 
 void Ieee1609Dot2ALL::onBSM(DemoSafetyMessage* bsm){

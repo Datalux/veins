@@ -28,7 +28,7 @@ class VEINS_API Ieee1609Dot2{
 
     typedef struct {
         int restultCode;
-        std::string data;
+        SafetyBSM data;
     } DecryptionResult;
 public:
     Ieee1609Dot2() { }
@@ -36,7 +36,7 @@ public:
 
     //Ieee1609Dot2Data* createSPDU(int type, std::string content);
 
-    std::string processSPDU(Ieee1609Dot2Message* spdu);
+    SafetyBSM processSPDU(Ieee1609Dot2Message* spdu);
 
     void SecSecureDataPreprocessingRequest(
             Ieee1609Dot2Data* data,

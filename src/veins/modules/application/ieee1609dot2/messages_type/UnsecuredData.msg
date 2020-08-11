@@ -13,6 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
+cplusplus {{
+    #include "../bsm/SafetyBSM_m.h"
+}}
+
+class SafetyBSM;
+
 packet UnsecuredData {
-    string unsecuredData;
+    SafetyBSM unsecuredData;
 }

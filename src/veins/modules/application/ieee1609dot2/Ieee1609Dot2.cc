@@ -14,7 +14,7 @@
 
 using namespace veins;
 
-std::string Ieee1609Dot2::processSPDU(Ieee1609Dot2Message* spdu)
+SafetyBSM Ieee1609Dot2::processSPDU(Ieee1609Dot2Message* spdu)
 {
     if(spdu->getData().getProtocolVersion() != 3){
         delete(spdu);
@@ -30,8 +30,12 @@ std::string Ieee1609Dot2::processSPDU(Ieee1609Dot2Message* spdu)
             }
             case ContentChoiceType::SIGNED_DATA:
             {
-                ContentSignedData signedData = spdu->getData().getContent().getSignedData();
-                return std::to_string(signedData.getSignedData().getSignature());
+                ContentSignedData contentSignedData = spdu->getData().getContent().getSignedData();
+                SignedData signedData = contentSignedData.getSignedData();
+                ToBeSignedData tbsData = signedData.getTbsData();
+                SignedDataPayload signedDataPayload = tbsData.getPayload();
+                Ieee1609Dot2Data* data = signedDataPayload.getData();
+                return data->getContent().getUnsecuredData().getUnsecuredData().getUnsecuredData();
 
             }
             case ContentChoiceType::ENCRYPTED_DATA:
@@ -176,7 +180,8 @@ EncryptedData* Ieee1609Dot2::SecEncryptedDataRequest(
             )
 {
     EncryptedData* encryptedData = new EncryptedData();
-    encryptedData->setCiphertext(data->getContent().getUnsecuredData().getUnsecuredData().getUnsecuredData());
+    SafetyBSM bsm = data->getContent().getUnsecuredData().getUnsecuredData().getUnsecuredData();
+    encryptedData->setCiphertext(std::to_string(bsm.getDSRC_MessageID()).c_str());
     encryptedData->setRecipients("recipients");
     return encryptedData;
 }
